@@ -1,12 +1,12 @@
 ---
-title: 🌊
+title: 🌊🌳
 ---
 Hi. ሰላም
 
-Welcome to my digital garden, where I share my writings and projects I have worked on. 
+Welcome to my digital garden! Here you can find my writings and projects I have worked on. 
 
 
-Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned)
+Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned): 
 
 | Name | Status |
 | ---- | ---- |
@@ -15,6 +15,12 @@ Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned)
 | [[RecSys]] | 🟡 |
 | [[dAIgram]] | ✅ |
 | [[charred]] | ✅ |
+|  |  |
+
+Writings: 
+- [[The Cult of Done manifesto]]
+
+
 
 Work: 
 - Mid level Software Engineer @ Ericsson (April 2023 - Present)
