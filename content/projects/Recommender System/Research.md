@@ -2,32 +2,33 @@
 ## Explore existing real-time recommendation systems.
 
 ### 1. Scaling the Instagram Explore recommendations system
- ![[Screen Shot 2023-11-03 at 3.56.40 PM.png]]
+ ![[Instagra_ranking.png]]
+ 
 
 #### 1.1 Retrieval
 - This stage retrieves the content that will be ranked in later stages
 - Narrows down the search from billions to hundreds
 - There are four types of candidate sources: 
 
-![[Screen Shot 2023-11-03 at 5.10.23 PM.png]]
+![[candidates_sources.png]]
 
 Two tower model: 
 
-![[Screen Shot 2023-11-03 at 5.22.03 PM.png]]
+![[Two_tower_model.png]]
 
 Two tower model for retrieval: 
 
-![[Screen Shot 2023-11-03 at 5.23.28 PM.png]]
+![[two_tower_retrieval.png]]
 
 Two tower model for history: 
 
-![[Screen Shot 2023-11-03 at 5.23.45 PM.png]]
+![[two_tower_history.png]]
 
 #### 1.2 First stage ranking
 
 - Lightweight model that is less precise and less computationally intensive and can recall thousand of candidates. 
 - Train the first stage ranker to predict the output of the second stage ranker. 
-![[Screen Shot 2023-11-03 at 5.27.58 PM.png]]
+![[first_stage_ranking.png]]
 #### 1.3 Second stage ranking
 
 - Multi task multi label neural network
@@ -44,7 +45,8 @@ Two tower model for history:
 >**To generate candidates, we apply k-nearest neigbours** (à la YouTube’s implementation). However, exact kNN is slow and we don’t really need the precision at this stage. Thus, we’ll use [_approximate_ nearest neighbours](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor) (ANN) instead.
 
 
-![[Screen Shot 2023-11-03 at 5.41.29 PM.png]]
+![[mvp.png]]
+
 
 
 ## Identify potential algorithms suitable for cold-start recommendations 

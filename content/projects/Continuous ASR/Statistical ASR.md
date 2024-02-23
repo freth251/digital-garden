@@ -67,7 +67,7 @@ Till now we said that we want predict a sequence of words given an input audio. 
 
 In our journey to transcribe audio signals to text, we first need to convert them into a usable format. We do this by extracting the Mel-Frequency Cepstral Coefficients (MFCC) for a specific frame of the audio signal. For example we can extract the MFCC an audio clip with 39 coefficient for an audio frame of length 25 ms every 10 ms, the following diagram illustrates this: 
 
-![[Pasted image 20240219140721.png]]
+![[extract_mfcc.png]]
 
 Now that we have our X in a usable format, we can start building our acoustic model, that is P(X|W). But before doing so we need to introduce a few key concepts: Gaussian mixture models, Markov chains and Hidden Markov models. 
 
