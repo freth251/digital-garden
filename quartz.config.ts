@@ -3,7 +3,7 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "የአሜን ድህረ ገጽ | Amen's website",
+    pageTitle: "Amen Abshir",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
