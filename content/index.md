@@ -1,4 +1,27 @@
 ---
-title: Welcome to my digital garden
+title: 🌊
 ---
-Hi 👋 my name is Amen Tamrate Abshir. I am a software engineer based in Ottawa, Canada where I went to school and got my BSc in Computer Engineering. My current interests include: MLOps, NLP, CV, Document AI, Diffusion models ... (all things AI basically). In this website, I intend to share my projects, my building and learning process, and my thoughts on varying topics. 
+Hi. ሰላም
+
+Welcome to my digital garden, where I share my writings and projects I have worked on. 
+
+
+Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned)
+
+| Name | Status |
+| ---- | ---- |
+| [[Continuous ASR]] | ⏳ |
+| [[AI or Not]] | ✅ |
+| [[RecSys]] | 🟡 |
+| [[dAIgram]] | ✅ |
+| [[charred]] | ✅ |
+
+Work: 
+- Mid level Software Engineer @ Ericsson (April 2023 - Present)
+- Junior Software Engineer @ Ericsson (July 2022 - April 2023)
+- Teaching Assistant for Computer Architecture courses @ University of Ottawa (2021)
+- Part of the Guidance and Navigation team @ UoRover (2021-2022)
+
+School: 
+- Bachelors of Applied Sciences, Computer Engineering @University of Ottawa (2017-2022)
+
