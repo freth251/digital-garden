@@ -3,7 +3,7 @@ title: 🌊🌳
 ---
 Hi. ሰላም
 
-Welcome to my digital garden! Here you can find my writings and projects I have worked on. 
+Welcome to my digital garden! Here you can find my work. 
 
 
 Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned): 
@@ -20,7 +20,8 @@ Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned):
 Writings: 
 - [[The Cult of Done manifesto]]
 
-
+Interesting links: 
+- 
 
 Work: 
 - Mid level Software Engineer @ Ericsson (April 2023 - Present)
