@@ -15,7 +15,7 @@ Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned):
 | [[RecSys]] | 🟡 |
 | [[dAIgram]] | ✅ |
 | [[charred]] | ✅ |
-|  |  |
+| [[ideAI]] | ❌ |
 
 Writings: 
 - [[The Cult of Done manifesto]]

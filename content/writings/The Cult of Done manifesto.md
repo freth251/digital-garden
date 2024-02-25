@@ -1,4 +1,4 @@
-The Cult of Done is a document written by Bre Pettis and Kio Startk in 2009. I discovered it at a point in my life when I was feeling uncreative and stuck. If you are stuck in a rut, this might be the boost you need to get started. 
+The Cult of Done is a document written by Bre Pettis and Kio Startk in 2009. I discovered it at a point in my life when I was feeling uncreative and stuck. If you are going through the same thing, this might be the boost you need to get started. 
 
 
 ## 1. There are three states of being. Not knowing, action and completion. 
