@@ -12,3 +12,9 @@ So very roughly the project is broken down into 3 parts:
 - Build a DL model 
 - Build an Interface
 
+
+Next: 
+- [[Statistical ASR]]
+- [[DL ASR]]
+- 
+

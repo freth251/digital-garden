@@ -114,3 +114,10 @@
 		- Novelty measures how often the recommender system suggests new or unknown items, while diversity measures the variety of recommendations. Both are important for keeping users engaged over time by providing fresh and varied content.
 	- Serendipity
 		- This metric captures the unexpectedness of the recommendation. A high level of serendipity can enhance user engagement by providing delightful content that users didn't know they would enjoy.
+
+
+Related: 
+- [[Database Setup]]
+- [[Design System Architecture]]
+- [[Develop Recommendation Engine]]
+- [[Research]]
