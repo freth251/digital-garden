@@ -3,19 +3,21 @@ title: 🌊🌳
 ---
 Hi. ሰላም
 
+
 Welcome to my digital garden! 
 
 
 Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned): 
 
-| Name | Status |
-| ---- | ---- |
-| [[Continuous ASR]] | ⏳ |
-| [[AI or Not]] | ✅ |
-| [[RecSys]] | 🟡 |
-| [[dAIgram]] | ✅ |
-| [[charred]] | ✅ |
-| [[ideAI]] | ❌ |
+| Name                    | Status |
+| ----------------------- | ------ |
+| [[Hidden Markov Model]] | ✅      |
+| [[Continuous ASR]]      | ⏳      |
+| [[AI or Not]]           | ✅      |
+| [[RecSys]]              | 🟡     |
+| [[dAIgram]]             | ✅      |
+| [[charred]]             | ✅      |
+| [[ideAI]]               | ❌      |
 
 Writings: 
 - [[The Cult of Done manifesto]]
