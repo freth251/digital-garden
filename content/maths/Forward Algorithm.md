@@ -4,7 +4,7 @@ Given a [[maths/Hidden Markov Model|Hidden Markov Model]] with known parameters 
 ![[hmm_full.png]]
 
 
-Let's say we observe 😫,😃,😃. What is the likelihood of observing these states, given our hidden markov model? 
+Let's say we observe 😫,😃. What is the likelihood of observing these states, given our hidden markov model? 
 
 The naive approach is to enumerate all possible hidden states and sum their probabilities. That is: 
 
