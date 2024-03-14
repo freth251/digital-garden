@@ -12,7 +12,7 @@ Projects (✅: Done, ⏳: In Progress,🟡: Paused, ❌: Abandoned):
 | Name                    | Status |
 | ----------------------- | ------ |
 | [[Hidden Markov Model]] | ✅      |
-| [[Continuous ASR]]      | ⏳      |
+| [[Continuous ASR]]      | ❌      |
 | [[AI or Not]]           | ✅      |
 | [[RecSys]]              | 🟡     |
 | [[dAIgram]]             | ✅      |
