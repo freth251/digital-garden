@@ -1,6 +1,8 @@
 ---
-title: 🌳
+title: 🦜
 ---
+*Petit à petit, l'oiseau fait son nid.*
+
 
 Hi. ሰላም።
 
@@ -11,6 +13,7 @@ Technical blog:
 - [[http-server-from-scratch|Writing an HTTP server from scratch]] ([Github](https://github.com/freth251/http-from-scratch) )
 - [[Hidden Markov Model|Understanding the maths behind hidden markov models]] ([Github](https://github.com/freth251/hmm))
 - [[AI or Not|Exploring The Full Stack of Deep Learning with an AI or Not model]] ([GitHub](https://github.com/freth251/fsdl-aiornot))
+- [[food_delivery_robot|Food Delivery Robot]] ([GitHub](https://github.com/SantiagoCely/robotDeliverySystem))
 
 
 My projects:
