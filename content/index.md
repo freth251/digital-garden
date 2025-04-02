@@ -3,7 +3,6 @@ title: 🦜
 ---
 *Petit à petit, l'oiseau fait son nid.*
 
-
 Hi. ሰላም።
 
 Welcome to my digital garden! 
@@ -29,4 +28,17 @@ Work:
 
 School: 
 - Bachelors of Applied Sciences, Computer Engineering @University of Ottawa (2017-2022)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
