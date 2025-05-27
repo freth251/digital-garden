@@ -1,7 +1,7 @@
 2025-05-26 14:45
 
 [Code](https://github.com/freth251/tensor-opt-kernels)
-*under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction.*
+*under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...under construction...*
 
 # Building a High-Performance GEMM Kernel
 
