@@ -8,7 +8,7 @@ Hi. ሰላም።
 Welcome to my digital garden! 
 
 Technical blog: 
-- [[Building a High-Performance GEMM Kernel]] (under construction)
+- [[Building a High-Performance GEMM Kernel]] (under construction)[Code](https://github.com/freth251/tensor-opt-kernels)
 - [[turaco-website|Making my first website for a real business]] ([Frontend](https://github.com/freth251/turaco-website), [Backend](https://github.com/freth251/turaco-backend))
 - [[http-server-from-scratch|Writing an HTTP server from scratch]] ([Github](https://github.com/freth251/http-from-scratch) )
 - [[Hidden Markov Model|Understanding the maths behind hidden markov models]] ([Github](https://github.com/freth251/hmm))
