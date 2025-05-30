@@ -1,6 +1,6 @@
 2025-05-26 14:45
 
-
+([Github](https://github.com/freth251/tensor-opt-kernels))
 # Building a High-Performance GEMM Kernel
 
 In this blog, we will implement a general purpose matrix multiplication program and optimize the sh** out it, explaining each optimization technique along the way.  We will not seek any algorithmic savings, although those are often more important. 
