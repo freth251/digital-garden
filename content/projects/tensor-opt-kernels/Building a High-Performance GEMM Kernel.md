@@ -3,13 +3,15 @@
 
 # Building a High-Performance GEMM Kernel
 
-In this blog, we will start with the naive implementation of a general purpose matrix multiplication and work our way up to highly optimized implementation, explaining each optimization trick along the way.  In this blog we will not seek algorithmic savings, although those are often more important. 
+In this blog, we will implement a general purpose matrix multiplication program and optimize the sh** out it, explaining each optimization technique along the way.  We will not seek any algorithmic savings, although those are often more important. 
 
-## How we measure performance
+## Measuring performance
 
-There are several ways we can measure performance. The most straightforward one is to measure how long the program takes and how many operations per second is performed. This is good enough for our use case because we only care about how these metrics have improved from one implementation to the next. 
+There are several ways we can measure performance. The most straightforward one is to measure how long the program takes and how many operations per second it performs. This is good enough for our use case because we only care about how these metrics have improved from one implementation to the next. 
 
+### Execution Time and GFLOPS
 ---
+
 Execution time: 
 - $t$ : execution time in seconds
 - $\text{start}$: program start time
@@ -19,7 +21,7 @@ $$
 t = \text{end} - \text{start}
 $$
 
-To make sure we have consistent readings, we average  out the execution time over multiple runs. 
+To make sure we have consistent readings, we average out the execution time over multiple runs. 
 
 $$
 \bar{t} = \frac{1}{n} \sum_{i=1}^{n} t_i
@@ -28,7 +30,7 @@ We would want to **minimize** $\bar{t}$.
 
 ---
 
-Matrix multiplication:
+We define a matrix multiplication:
 
 $$
 C = A \cdot B
@@ -56,7 +58,7 @@ $$
 We would want to **maximize** $\text{GFLOPS}$.
 
 
-## Naive Implementations
+## Initial Implementation
 
 
 ```cpp
@@ -70,7 +72,7 @@ void gemm_naive(const float* A, const float* B, float* C, int M, int N, int K) {
 }
 ```
 
-Our naive implementation performs a matrix multiplication using three for loops.  
+Our simple implementation performs a matrix multiplication using three for loops.  
 
 Measuring it's performance we observe the following results. 
 
@@ -87,7 +89,9 @@ The execution time grows exponentially with size as expected.
 
 ### Optimizing Compilers 
 
-Modern compilers employ optimization techniques such as code selection and ordering, dead code elimination, register allocation and eliminating minor inefficiencies. Although they are helpful, there are limitations to how aggressively it can optimize our code because it operates under fundamental constraints (no change in program behavior) and limited context (analysis performed only within procedures and based only on static information). *When in doubt the compiler must be conservative.*
+Modern compilers employ optimization techniques such as code selection and ordering, dead code elimination, register allocation and eliminating minor inefficiencies. Although they are helpful, there are limitations to how aggressively it can optimize our code because it operates under fundamental constraints (no change in program behavior) and limited context (analysis performed only within procedures and based only on static information). 
+
+*When in doubt the compiler must be conservative.*
 
 One such optimization blockers is the potential for **memory aliasing**. 
 
@@ -102,13 +106,13 @@ If we take a closer look at the assembly code that corresponds to `C[i * N + j] 
 
 The concerning line is the second one because It means that we update `C[i * N + j]` on every iteration. We are performing an unnecessary operation on each iteration. 
 
-This might seem like an obvious job for the compiler to optimize because we do not need to update the memory on every iteration only once. But the compiler must consider the possibility that `A` and/or `B` point to the same memory as `C`. If that were the case we are changing the value of the elements on each iteration thus need to update the memory. 
+This might seem like an obvious job for the compiler to optimize as we do not need to update the memory only once and not on every iteration. But the compiler must consider the possibility that `A` and/or `B` point to the same memory as `C`. If that were the case we are changing the value of the elements on each iteration thus need to update the memory. 
 
 The compiler cannot perfectly detect if two pointers point to the same thing because the value of the pointers can be dependent on runtime behavior, and in the general case determining wether aliasing occurred is undecidable because of the halting problem. 
 
-Compilers assume aliasing is possible unless they can prove it's not, which is possible in very simple cases. Thus they take the conservative route and update the memory on each iterations. 
+Compilers assume aliasing is possible unless they can prove it's not, which is possible only in very simple cases. They take the conservative route and update the memory on each iterations. 
 
-One way we can resolve this is by accumulating the sum within the loop and update the memory at end of the iterations. 
+One way we can resolve this is by **accumulating the sum** within the loop and update the memory at end of the iterations. 
 
 ```cpp
 void gemm_mem_aliasing(const float* A, const float* B, float* C, int M, int N, int K) {
@@ -116,7 +120,7 @@ void gemm_mem_aliasing(const float* A, const float* B, float* C, int M, int N, i
         for (int j = 0; j < N; ++j) {
             float sum = 0.0f;
             for (int k = 0; k < K; ++k)
-                sum += A[i * K + k] * B[k * N + j];
+                sum += A[i * K + k] * B[k * N + j]; //accumulate in sum
             C[i * N + j] = sum;
         }
 }
@@ -137,21 +141,25 @@ By accumulating the sum within the loop, we are performing one less instruction 
 
 ## Loop Unrolling
 
-Modern processors don't execute instructions one at a time as the reading assembly code suggests. Instead they perform instruction level parallelism where complex mechanisms are employed to execute **multiple instructions at the same** time while presenting a view of a simple sequential instruction execution. 
+Modern processors don't execute instructions one at a time as reading the assembly code of program suggests. Instead they perform instruction level parallelism where complex mechanisms are employed to execute **multiple instructions at the same** time while presenting a view of a simple sequential instruction execution.
 
-In this model, computation is divided into stages and while one goes through the different stages another can start if they have no dependency. 
+In this model, computation is divided into stages and while one goes through the different stages another can start if they have no dependency.
 
-(For Haswell CPU)
 
-| Instruction                 | Latency  | Cycles/Issue |
-| --------------------------- | -------- | ------------ |
-| Load / Store                | 4        | 1            |
-| Integer Multiply            | 3        | 1            |
-| **Integer/Long Divide**     | **3–30** | **3–30**     |
-| Single/Double FP Multiply   | 5        | 1            |
-| Single/Double FP Add        | 3        | 1            |
-| **Single/Double FP Divide** | **3–15** | **3–15**     |
-our inner loop 
+The following table shows the latency (how many clock cycles an instruction takes), the cycle/issue (the minimum number of cycles between two independent instructions) and the capacity (how many of these operations can be issued simultaneously) for Intel Core i7 Haswell CPUs. 
+
+| Instruction                 | Latency  | Cycles/Issue | Capacity |
+| --------------------------- | -------- | ------------ | -------- |
+| Load/Store                  | 4        | 1            | 2        |
+| Store                       | 4        | 1            | 1        |
+| Integer Add                 | 1        | 1            | 4        |
+| Integer Multiply            | 3        | 1            | 1        |
+| **Integer/Long Divide**     | **3–30** | **3–30**     | **1**    |
+| Single/Double FP Multiply   | 5        | 1            | 2        |
+| Single/Double FP Add        | 3        | 1            | 1        |
+| **Single/Double FP Divide** | **3–15** | **3–15**     | **1**    |
+
+The assemble code of our inner loop before unrolling
 ```asm
 .L4:
         movss   (%rax), %xmm0
@@ -163,11 +171,32 @@ our inner loop
         jne     .L4
 ```
 
+and after unrolling
+```asm
+.L4:
+        movss   (%rax), %xmm1
+        mulss   (%rdx), %xmm1
+        addq    $8, %rax
+        addss   %xmm1, %xmm0
+        movss   -4(%rax), %xmm1
+        mulss   (%rdx,%rcx,4), %xmm1
+        addq    %rdi, %rdx
+        addss   %xmm1, %xmm0
+        cmpq    %rax, %r8
+        jne     .L4
+        movss   %xmm0, (%r11,%r9,4)
+        addq    $1, %r9
+        addq    $4, %r10
+        cmpq    %r9, %rcx
+        jne     .L5
+        movl    -36(%rsp), %edx
+```
+
 Doing more work in the inner loop would give us optimization gains in two ways: 
 - Minimizes the number of operation outside of the loop ( testing if loop condition is met/ incrementing)
-- Gives the processor an opportunity to rearrange the execution order, and run some instruction in parallel. 
+- Gives the processor an opportunity to **rearrange the execution order**, and run some of the  instructions in **parallel**. 
 
-We can unroll the loop once by adding one more operations in the inner loop. We can further unroll the loop by adding three operation in the inner loop. 
+We can unroll the loop once by adding one more operation in the inner loop. We can further unroll the loop by adding three operations in the inner loop. 
 
 ```cpp
 void gemm_loop_unrolling_x1(const float* A, const float* B, float* C, int M, int N, int K) {
@@ -208,7 +237,7 @@ void gemm_loop_unrolling_x3(const float* A, const float* B, float* C, int M, int
 
 ![[timesec_naive_mem_aliasing_loop_unrolling_x1_loop_unrolling_x3.png]]
 
-We can see that we have further optimization gains by unrolling our loops. Unrolling 3 times is more efficient for smaller matrices but the the difference with the once unrolled program disappears as the size of matrix increases. 
+Further optimization gains can be seen by unrolling our loops. Unrolling 3 times is more efficient for smaller matrices but the the difference with the once unrolled program disappears as the size of matrix increases. 
 
 We hit a point of **diminishing returns** when it comes to loop unrolling due to the fact that it requires more and more registers which can lead to exhausting the available CPU registers. When that happens we will be using the memory to store/load variables which has a high performance overhead. 
 ## Cache Blocking
@@ -252,9 +281,9 @@ void gemm_cache_blocking(const float* A, const float* B, float* C, int M, int N,
 
 ![[timesec_naive_mem_aliasing_loop_unrolling_x1_loop_unrolling_x3_cache_blocking.png]]
 
-Here we can observe big optimization gains. The GFLOPS start out in in the middle of the pack, possibly due to the overhead incurred by the additional operations needed to setup the cache blocking, but as the matrix size increases we can see that we are performing more than twice the amount of operations per second. 
+The GFLOPS start out in in the middle of the pack, possibly due to the overhead incurred by the additional operations needed to setup the cache blocking, but as the matrix size increases we can see that we are performing more than twice the amount of operations per second. 
 
-This optimization shows us that memory is a big bottleneck in performance. The more we work within the cache, the faster our program is. 
+This optimization shows us that **memory is a big bottleneck in performance**. The more we work within the cache, the faster our program is. 
 
 ## SIMD
 
@@ -293,6 +322,5 @@ less register pressure (fewer intermediate results). The FMA is vectorized meani
 
 ## References
 
-- Chapter 5 of Computer Systems: A Programmer's Perspective (3rd Edition)
-- ChatGPT/Claude
-- https://www.youtube.com/watch?v=G92BCtfTwOE
+- Computer Systems: A Programmer's Perspective (3rd Edition)
+- [Performance x64: Cache Blocking (Matrix Blocking)](https://www.youtube.com/@WhatsACreel)
