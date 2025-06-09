@@ -16,7 +16,8 @@ Technical blog:
 - [[food_delivery_robot|Food Delivery Robot]] ([GitHub](https://github.com/SantiagoCely/robotDeliverySystem))
 
 
-My projects:
+Other projects:
+- [Mandelbrot set explorer using OpenGL](https://github.com/freth251/mandelbrot-explorer)
 - [[charred|Character Aware Diffusion Models]]: Training Diffusion models that can spell ([Github](https://github.com/freth251/charred))
 - [[dAIgram]]: Making Diagrams with LLMs ([Github](https://github.com/freth251/dAIgram/))
 
