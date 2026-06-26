@@ -8,7 +8,7 @@ Hi. ሰላም።
 Welcome to my digital garden! 
 
 Technical blog: 
-- [Poking around /proc/self/maps](projects/vitrual_memory/print_proc) ([Code](https://github.com/freth251/print-proc))
+- [[print_proc|Poking around &#47;proc&#47;self&#47;maps]] ([Code](https://github.com/freth251/print-proc))
 - [[Building a High-Performance GEMM Kernel]] ([Code](https://github.com/freth251/tensor-opt-kernels))
 - [[turaco-website|Making my first website for a real business]] ([Frontend](https://github.com/freth251/turaco-website), [Backend](https://github.com/freth251/turaco-backend))
 - [[http-server-from-scratch|Writing an HTTP server from scratch]] ([Github](https://github.com/freth251/http-from-scratch) )
