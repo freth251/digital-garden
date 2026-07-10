@@ -18,6 +18,7 @@ Technical blog:
 
 
 Other projects:
+* [malloc/free reimplementation](https://github.com/freth251/malloc)
 - [Mandelbrot set explorer using OpenGL](https://github.com/freth251/mandelbrot-explorer)
 - [[charred|Character Aware Diffusion Models]]: Training Diffusion models that can spell ([Github](https://github.com/freth251/charred))
 - [[dAIgram]]: Making Diagrams with LLMs ([Github](https://github.com/freth251/dAIgram/))
